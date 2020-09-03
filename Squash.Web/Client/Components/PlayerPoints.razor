@@ -10,14 +10,30 @@
 @using ChartJs.Blazor.ChartJS.Common.Axes.Ticks
 @using ChartJs.Blazor.ChartJS.Common.Time 
 @using Squash.Web.Client.ChartJS
+@using System.Globalization
 
+@if (NumberOfResults == 0)
+{
     From: <input id="txtDate" type="date" @bind-value="From" /> To: <input id="txtDate" type="date" @bind-value="To" />
-    <a class="button" @onclick="@UpdateChart">Show</a>
+        <a class="button" @onclick="@UpdateChart">Show</a>
+}
     <ChartJsLineChart @ref="_lineChartJs" Config="@_lineConfig" Width="600" Height="300" />
 
 @code {
+    private int selectedPlayer;
+
     [Parameter]
-    public int SelectedPlayer { get; set; }
+    public int SelectedPlayer { 
+        get { return selectedPlayer; } 
+        set
+        {
+            selectedPlayer = value;
+            UpdateChart();
+        }
+    }
+
+    [Parameter]
+    public int NumberOfResults { get; set; }
 
     public DateTime? From { get; set; }
 
@@ -175,14 +191,27 @@
     private async Task GetPlayerStatistics(int playerId)
     {
         var query = "";
-        if (From.HasValue)
-        {
-            query += $"&From={From.Value.ToShortDateString()}";
+        if (NumberOfResults == 0) {
+            if (From.HasValue)
+            {
+                query += $"&From={From.Value.ToString("yyyy.MM.dd", CultureInfo.InvariantCulture)}";
+            }
+            if (To.HasValue)
+            {
+                query += $"&To={To.Value.ToString("yyyy.MM.dd", CultureInfo.InvariantCulture)}";
+            }
         }
-        if (To.HasValue)
+        else
         {
-            query += $"&To={To.Value.ToShortDateString()}";
+            query += $"&numberOfResults={NumberOfResults}";
         }
-        players = await Http.GetFromJsonAsync<IEnumerable<Squash.Shared.Data.Dto.PlayerWithPointsDto>>($"Points?onlyactive=true{query}");
+        if (playerId == 0)
+        {
+            players = await Http.GetFromJsonAsync<IEnumerable<Squash.Shared.Data.Dto.PlayerWithPointsDto>>($"Points?onlyactive=true{query}");
+        }
+        else
+        {
+            players = new[] { await Http.GetFromJsonAsync<Squash.Shared.Data.Dto.PlayerWithPointsDto>($"Points/{playerId}?{query.TrimStart('&')}") };
+        }
     }
 }

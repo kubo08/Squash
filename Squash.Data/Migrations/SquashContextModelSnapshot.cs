@@ -17,12 +17,12 @@ namespace Squash.Data.Migrations
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.0-preview.7.20365.15");
+                .HasAnnotation("ProductVersion", "5.0.0-preview.8.20407.4");
 
             modelBuilder.Entity("Squash.Domain.Game", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd() 
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
@@ -99,6 +99,9 @@ namespace Squash.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
+
+                    b.Property<double>("ActualPoints")
+                        .HasColumnType("float");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -209,7 +212,7 @@ namespace Squash.Data.Migrations
                         .WithMany()
                         .HasForeignKey("Player2Id");
 
-                    b.HasOne("Squash.Domain.Tournament", null)
+                    b.HasOne("Squash.Domain.Tournament", "Tournament")
                         .WithMany("Matches")
                         .HasForeignKey("TournamentId");
                 });

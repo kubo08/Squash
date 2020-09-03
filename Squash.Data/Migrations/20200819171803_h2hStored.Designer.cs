@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Squash.Data;
 
 namespace Squash.Data.Migrations
 {
     [DbContext(typeof(SquashContext))]
-    partial class SquashContextModelSnapshot : ModelSnapshot
+    [Migration("20200819171803_h2hStored")]
+    partial class h2hStored
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +24,7 @@ namespace Squash.Data.Migrations
             modelBuilder.Entity("Squash.Domain.Game", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd() 
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
 

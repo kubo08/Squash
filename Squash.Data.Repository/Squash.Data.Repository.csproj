@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Squash.Data.Interfaces\Squash.Data.Interfaces.csproj" />
-    <ProjectReference Include="..\SquashDownloader.Data\Squash.Data.csproj" />
+    <ProjectReference Include="..\Squash.Data\Squash.Data.csproj" />
   </ItemGroup>
 
 </Project>

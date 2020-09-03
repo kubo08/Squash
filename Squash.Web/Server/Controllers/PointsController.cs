@@ -19,9 +19,21 @@ namespace Squash.Web.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<PlayerWithPointsDto>> Get([FromQuery] bool onlyActive = true, [FromQuery] DateTime? From = null, [FromQuery] DateTime? To = null)
+        public async Task<IEnumerable<PlayerWithPointsDto>> Get([FromQuery] bool onlyActive = true, [FromQuery] int numberOfResults = 0, [FromQuery] DateTime? From = null, [FromQuery] DateTime? To = null)
         {
-            return await pointsService.GetAllPlayersPoints(onlyActive,From,To);
+            if (numberOfResults == 0)
+                return await pointsService.GetAllPlayersPoints(onlyActive, From, To);
+            else
+                return await pointsService.GetAllPlayersPoints(onlyActive, numberOfResults);
+        }
+
+        [HttpGet("{id:int}")]
+        public async Task<PlayerWithPointsDto> Get(int id, [FromQuery] int numberOfResults = 0, [FromQuery] DateTime? From = null, [FromQuery] DateTime? To = null)
+        {
+            if (numberOfResults == 0)
+                return await pointsService.GetAllPlayersPoints(id, From, To);
+            else
+                return await pointsService.GetAllPlayersPoints(id, numberOfResults);
         }
     }
 }

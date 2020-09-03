@@ -29,7 +29,7 @@ namespace Squash.Data
                 .UseLoggerFactory(ConsoleLoggerFactory)
                 .EnableSensitiveDataLogging()
                 .UseSqlServer("Data Source = localhost; Initial Catalog = Squash; integrated security = true");
-        } 
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Squash.Domain", "SquashDownloader.Domain\Squash.Domain.csproj", "{BBCFFDAF-094B-4F97-8261-6F7E7CED1378}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Squash.Data", "SquashDownloader.Data\Squash.Data.csproj", "{908C3DC5-2AF5-4549-BFC1-BD787DA8F356}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{8AEDB7C4-5642-489D-8458-1AF58EC7BBAA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Squash.Web.Server", "Squash.Web\Server\Squash.Web.Server.csproj", "{66643F96-F8A0-4E4C-872B-CCFB9C8239B6}"
@@ -21,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Squash.Web.Shared", "SQuash
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Squash.Shared.Data", "Squash.Shared.Data\Squash.Shared.Data.csproj", "{40CD6DB4-DBB1-4CF9-9AD7-3C5BC3C1927B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Squash.Data", "Squash.Data\Squash.Data.csproj", "{B1234DBF-4209-40C5-AF65-B7C0A0E3072F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,10 +31,6 @@ Global
 		{BBCFFDAF-094B-4F97-8261-6F7E7CED1378}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBCFFDAF-094B-4F97-8261-6F7E7CED1378}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBCFFDAF-094B-4F97-8261-6F7E7CED1378}.Release|Any CPU.Build.0 = Release|Any CPU
-		{908C3DC5-2AF5-4549-BFC1-BD787DA8F356}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{908C3DC5-2AF5-4549-BFC1-BD787DA8F356}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{908C3DC5-2AF5-4549-BFC1-BD787DA8F356}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{908C3DC5-2AF5-4549-BFC1-BD787DA8F356}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8AEDB7C4-5642-489D-8458-1AF58EC7BBAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8AEDB7C4-5642-489D-8458-1AF58EC7BBAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AEDB7C4-5642-489D-8458-1AF58EC7BBAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -63,6 +59,10 @@ Global
 		{40CD6DB4-DBB1-4CF9-9AD7-3C5BC3C1927B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40CD6DB4-DBB1-4CF9-9AD7-3C5BC3C1927B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40CD6DB4-DBB1-4CF9-9AD7-3C5BC3C1927B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1234DBF-4209-40C5-AF65-B7C0A0E3072F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1234DBF-4209-40C5-AF65-B7C0A0E3072F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1234DBF-4209-40C5-AF65-B7C0A0E3072F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1234DBF-4209-40C5-AF65-B7C0A0E3072F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,23 +2,23 @@
 
 namespace Squash.Data.Migrations
 {
-    public partial class isJogo : Migration
+    public partial class currentPoints : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<bool>(
-                name: "IsJogo",
-                table: "Matches",
-                type: "bit",
+            migrationBuilder.AddColumn<double>(
+                name: "ActualPoints",
+                table: "Players",
+                type: "float",
                 nullable: false,
-                defaultValue: false);
+                defaultValue: 0.0);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "IsJogo",
-                table: "Matches");
-        } 
+                name: "ActualPoints",
+                table: "Players");
+        }
     }
 }

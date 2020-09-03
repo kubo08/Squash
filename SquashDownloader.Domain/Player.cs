@@ -10,6 +10,8 @@ namespace Squash.Domain
 
         public bool IsActive { get; set; }
 
+        public double ActualPoints { get; set; }
+
         public IList<PlayerTournament> PlayerTournaments { get; set; } = new List<PlayerTournament>();
 
         public IList<Points> Points { get; set; } = new List<Points>();

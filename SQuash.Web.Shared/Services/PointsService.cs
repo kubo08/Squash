@@ -20,5 +20,20 @@ namespace Squash.Web.Shared.Services
         {
             return _pointsRepository.GetAllPlayersPoints(onlyActive,From,To);
         }
+
+        public Task<IEnumerable<PlayerWithPointsDto>> GetAllPlayersPoints(bool onlyActive, int numberOfResults)
+        {
+            return _pointsRepository.GetAllPlayersPoints(onlyActive, numberOfResults);
+        }
+
+        public Task<PlayerWithPointsDto> GetAllPlayersPoints(int playerId, DateTime? From, DateTime? To)
+        {
+            return _pointsRepository.GetAllPlayersPoints(playerId, From, To);
+        }
+
+        public Task<PlayerWithPointsDto> GetAllPlayersPoints(int playerId, int numberOfResults)
+        {
+            return _pointsRepository.GetAllPlayersPoints(playerId, numberOfResults);
+        }
     }
 }

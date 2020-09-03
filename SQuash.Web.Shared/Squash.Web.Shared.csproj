@@ -6,8 +6,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Squash.Data.Interfaces\Squash.Data.Interfaces.csproj" />
+    <ProjectReference Include="..\Squash.Data\Squash.Data.csproj" />
     <ProjectReference Include="..\Squash.Shared.Data\Squash.Shared.Data.csproj" />
-    <ProjectReference Include="..\SquashDownloader.Data\Squash.Data.csproj" />
   </ItemGroup>
 
 </Project>
