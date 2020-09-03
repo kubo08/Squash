@@ -1,0 +1,88 @@
+﻿@page "/Player"
+
+@inject HttpClient Http
+@using Squash.Shared.Data.Dto;
+@using DbPlayer = Squash.Domain.Player;
+
+@if (players != null)
+{
+    <select @bind="@SelectedPlayer">
+        @foreach (var player in players)
+        {
+            <option value=@player.Id>@player.Name</option>
+        }
+    </select>
+}
+
+    @if (Statistics != null)
+    {
+<div class="container">
+    <div class="row">
+        <span>@Statistics.Name</span>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            Number of tournaments: @Statistics.TournamentCount
+        </div>
+        <div class="col-sm">
+            Number of matches: @Statistics.MatchesCount
+        </div>
+        <div class="col-sm">
+            Wins: @Statistics.Wins
+        </div>
+        <div class="col-sm">
+            Losts: @Statistics.Lost
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            @foreach (var points in Statistics.PointResults)
+            {
+            <div class="row">
+                <div class="col-sm @(points.Number > 0 ? "text-success" : "text-danger")">@points.Number </div>
+                <div class="col-sm">@points.Date.ToString("dd.MM.yyyy")</div>
+            </div>
+            }
+            </div>
+        <div class="col-sm">
+            @foreach(var player in Statistics.OponentStat)
+            {
+                var css = player.Wins > player.Lost ? "text-success" :  (player.Wins < player.Lost ? "text-danger" : "text-warning");
+            <div class="row">
+                <div class="col-sm">@player.Name</div>
+                <div class="col-sm @css">@player.Wins</div>
+                <div class="col-sm @css">@player.Lost</div>
+            </div>
+                }
+            </div>
+    </div>
+    </div>
+    }
+
+    @code {
+        private int selectedPlayer;
+        public int SelectedPlayer
+        {
+            get { return selectedPlayer; }
+            set
+            {
+                selectedPlayer = value;
+                UpdateStatistics();
+            }
+        }
+
+        public PlayerStatisticsDto Statistics { get; set; }
+        private IEnumerable<DbPlayer> players;
+
+        protected override async Task OnInitializedAsync()
+        {
+            players = await Http.GetFromJsonAsync<DbPlayer[]>("Player");
+            SelectedPlayer = players.FirstOrDefault(a => a.Name.ToLower().Trim() == "suso")?.Id ?? players.First().Id;
+        }
+
+        private async Task UpdateStatistics()
+        {
+            Statistics = await Http.GetFromJsonAsync<PlayerStatisticsDto>($"PlayerStatistics/{SelectedPlayer}?onlyEleven=true");
+            StateHasChanged();
+        }
+    }

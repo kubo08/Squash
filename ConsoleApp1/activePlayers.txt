@@ -1,0 +1,3 @@
+﻿update Players
+set IsActive=1
+where Name in ('Suso', 'Tomas', 'MishoP', 'Lojzo', 'Fildžo', 'Ďuri', 'Dušan', 'Peto', 'FilipG', 'Fero', 'Marco', 'LukyB', 'Rišo', 'Edo', 'Laco', 'blško')

@@ -1,0 +1,122 @@
+﻿@page "/h2h"
+
+@inject HttpClient Http
+@using DbPlayer = Squash.Domain.Player;
+@using Squash.Shared.Data.Dto; 
+
+@if(players!=null){
+<select @bind="@Player1" >
+    @foreach (var player in players)
+    {
+        <option value=@player.Id>@player.Name</option>
+    }
+</select>
+<select @bind="@Player2" >
+    @foreach (var player in players)
+    {
+        <option value=@player.Id>@player.Name</option>
+    }
+</select>
+<input type="checkbox" @bind="Eleven" title="After 1.6.2020 (matches to 11)" /> <span>After 1.6.2020(matches to 11)</span>
+}
+
+@if (headToHead != null)
+{
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            @headToHead.Player1
+        </div>
+        <div class="col-sm-3">
+            @headToHead.Player2
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            @headToHead.Wins1
+        </div>
+        <div class="col-sm-3">
+            @headToHead.Wins2
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            Matches
+        </div>
+    </div>
+    @foreach (var match in headToHead.Games)
+    {
+        <div class="row">
+            <div class="col-sm-3">
+                @match.Score1
+            </div>
+            <div class="col-sm-3">
+                @match.Score2
+            </div>
+            <div class="col-sm-3">
+                @match.Date.ToString("dd.MM.yyyy")
+            </div>
+        </div>
+    }
+</div>
+    
+}
+
+@code {
+    public int? Player1
+    {
+        get
+        {
+            return player1;
+        }
+        set
+        {
+            player1 = value;
+            Console.WriteLine(player1);
+            PlayerChanged();
+        }
+    }
+
+    public int? Player2
+    {
+        get
+        {
+            return player2;
+        }
+        set
+        {
+            player2 = value;
+            Console.WriteLine(player2);
+            PlayerChanged();
+        }
+    }
+
+    public bool Eleven { get; set; } = true;
+
+    private int? player1;
+    private int? player2;
+
+    private IEnumerable<DbPlayer> players;
+
+    private Squash.Shared.Data.Dto.HeadToHeadDto headToHead;
+
+    protected override async Task OnInitializedAsync()
+    {
+        players = await Http.GetFromJsonAsync<DbPlayer[]>("Player?onlyActive=true");
+
+        Player1 = players.FirstOrDefault(a => a.Name.ToLower().Trim() == "suso")?.Id ?? players.First().Id;
+        Player2 = players.FirstOrDefault().Id;
+    }
+
+    private async Task PlayerChanged()
+    {
+        if (!Player1.HasValue || !Player2.HasValue || Player1.Value == player2.Value)
+        {
+            return;
+        }
+
+        headToHead = await Http.GetFromJsonAsync<HeadToHeadDto>($"HeadToHead?player1={player1}&player2={player2}&onlyEleven={Eleven}");
+
+        StateHasChanged();
+    }
+}

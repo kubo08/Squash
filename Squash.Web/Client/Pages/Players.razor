@@ -1,0 +1,39 @@
+﻿@page "/players"
+@inject HttpClient Http
+@using DbPlayer = Squash.Domain.Player;
+
+@*<InputText @bind-Value="@SelectedPlayer"></InputText>*@
+@*<input @bind="@SelectedPlayer" type="number"/>*@
+@if (players != null)
+{
+    <select @bind="@SelectedPlayer">
+        @foreach (var player in players)
+        {
+            <option value=@player.Id>@player.Name</option>
+        }
+    </select>
+    <Squash.Web.Client.Components.PlayerPoints SelectedPlayer="@SelectedPlayer" />
+}
+
+@code {
+    private IEnumerable<DbPlayer> players;
+    private int selectedPlayer;
+    private DbPlayer player;
+
+    private int SelectedPlayer
+    {
+        get { return selectedPlayer; }
+        set
+        {
+            selectedPlayer = value;
+            StateHasChanged();
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        players = await Http.GetFromJsonAsync<DbPlayer[]>("Player");
+
+        SelectedPlayer = players.FirstOrDefault(a => a.Name.ToLower().Trim() == "suso")?.Id ?? players.First().Id;
+    }
+}
